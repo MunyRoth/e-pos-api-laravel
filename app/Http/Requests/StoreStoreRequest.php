@@ -11,7 +11,11 @@ class StoreStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return (
+            auth()->check() &&
+            (auth()->user()->role_id == 1 ||
+            auth()->user()->role_id == 2)
+        );
     }
 
     /**
@@ -22,7 +26,8 @@ class StoreStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name_km' => 'required|string|max:255',
+            'logo' => 'image|mimes:jpeg,jpg,png|max:8191'
         ];
     }
 }
