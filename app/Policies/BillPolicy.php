@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Store;
+use App\Models\Bill;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class StorePolicy
+class BillPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class StorePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Store $store): bool
+    public function view(User $user, Bill $bill): bool
     {
         //
     }
@@ -29,14 +29,13 @@ class StorePolicy
      */
     public function create(User $user): bool
     {
-        return $user->role_id == 1 ||
-            $user->role_id == 2;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Store $store): bool
+    public function update(User $user, Bill $bill): bool
     {
         //
     }
@@ -44,7 +43,7 @@ class StorePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Store $store): bool
+    public function delete(User $user, Bill $bill): bool
     {
         //
     }
@@ -52,7 +51,7 @@ class StorePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Store $store): bool
+    public function restore(User $user, Bill $bill): bool
     {
         //
     }
@@ -60,7 +59,7 @@ class StorePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Store $store): bool
+    public function forceDelete(User $user, Bill $bill): bool
     {
         //
     }

@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\StoreBranchController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +37,18 @@ Route::middleware('auth:api')->group(function () {
 
     // Store
     Route::resource('stores', StoreController::class);
+
+    // Store Branch
+    Route::get('store_branches/{storeId}', [StoreBranchController::class, 'index']);
+    Route::get('store_branches/{id}', [StoreBranchController::class, 'show']);
+    Route::post('store_branches', [StoreBranchController::class, 'store']);
+    Route::put('store_branches/{id}', [StoreBranchController::class, 'update']);
+    Route::delete('store_branches/{id}', [StoreBranchController::class, 'destroy']);
+
+    // Items
+    Route::get('items/{storeId}', [ItemController::class, 'index']);
+    Route::get('items/{id}', [ItemController::class, 'show']);
+    Route::post('items', [ItemController::class, 'store']);
+    Route::put('items/{id}', [ItemController::class, 'update']);
+    Route::delete('items/{id}', [ItemController::class, 'destroy']);
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Store;
 use App\Http\Requests\StoreStoreRequest;
 use App\Http\Requests\UpdateStoreRequest;
+use App\Models\StoreBranch;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class StoreController extends Controller
      */
     public function index(): Response
     {
-        $stores =  Auth::guard('api')->user()->stores;
+        $stores =  Auth::guard('api')->user()['stores'];
 
         return Response([
             'status' => 200,
@@ -39,6 +40,10 @@ class StoreController extends Controller
         $store->logo_url = $logoUrl;
         $store->name_km = $request->name_km;
         $store->save();
+
+        $branch = new StoreBranch;
+        $branch->address_km = $request->address_km;
+        $store->branches()->save($branch);
 
         $store->users()->sync($user->id);
 
@@ -67,16 +72,16 @@ class StoreController extends Controller
     public function update(UpdateStoreRequest $request, Store $store): Response
     {
         // update logo
-        if (!empty($request->logo_url))
+        if ($request->hasFile('logo'))
         {
             // Delete the old image file.
-            $logoUrl = $store->logo_url;
+            $logoUrl = $store['logo_url'];
             preg_match("/\/v(\d+)\/(\w+)\/(\w+)/",$logoUrl,$recordMatch);
             $id = $recordMatch[2].'/'.$recordMatch[3];
             Cloudinary::destroy($id);
 
             //upload new file
-            $logoUrl = Cloudinary::upload($request->file('logo_url')->getRealPath(), [
+            $logoUrl = Cloudinary::upload($request->file('logo')->getRealPath(), [
                 'folder' => 'ePOS'
             ])->getSecurePath();
 
@@ -86,33 +91,33 @@ class StoreController extends Controller
             ]);
         }
 
-        if ($request->name_km != '') {
+        if ($request->has('name_km')) {
             $store->update([
-                'name_km' => $request->name_km
+                'name_km' => $request->input('name_km')
             ]);
         }
 
-        if ($request->name_en != '') {
+        if ($request->has('name_en')) {
             $store->update([
-                'name_en' => $request->name_en
+                'name_en' => $request->input('name_en')
             ]);
         }
 
-        if ($request->website != '') {
+        if ($request->has('website')) {
             $store->update([
-                'website' => $request->website
+                'website' => $request->input('website')
             ]);
         }
 
-        if ($request->email != '') {
+        if ($request->has('email')) {
             $store->update([
-                'email' => $request->email
+                'email' => $request->input('email')
             ]);
         }
 
-        if ($request->phone != '') {
+        if ($request->has('phone')) {
             $store->update([
-                'phone' => $request->phone
+                'phone' => $request->input('phone')
             ]);
         }
 

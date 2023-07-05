@@ -7,6 +7,7 @@ use App\Notifications\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -49,6 +50,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function stores(): BelongsToMany
     {
         return $this->belongsToMany(Store::class, 'user_stores');
+    }
+
+    public function bills(): hasMany
+    {
+        return $this->hasMany(Bill::class);
     }
 
     /**
