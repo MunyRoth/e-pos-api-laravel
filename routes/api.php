@@ -34,5 +34,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('password/change', [PasswordController::class, 'changePassword']);
 
     // Store
-    Route::resource('store', StoreController::class);
+    Route::resource('stores', StoreController::class);
 });

@@ -64,7 +64,7 @@ class StoreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStoreRequest $request, Store $store)
+    public function update(UpdateStoreRequest $request, Store $store): Response
     {
         // update logo
         if (!empty($request->logo_url))

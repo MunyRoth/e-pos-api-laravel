@@ -11,7 +11,11 @@ class UpdateStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return (
+            auth()->check() &&
+            (auth()->user()->role_id == 1 ||
+                auth()->user()->role_id == 2)
+        );
     }
 
     /**
@@ -22,7 +26,12 @@ class UpdateStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name_km' => 'string|max:255',
+            'name_en' => 'string|max:255',
+            'logo' => 'image|mimes:jpeg,jpg,png|max:8191',
+            'website' => 'string|max:255',
+            'email' => 'email:rfc,dns|max:255',
+            'phone' => 'numeric|max:255'
         ];
     }
 }

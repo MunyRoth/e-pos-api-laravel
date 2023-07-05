@@ -27,7 +27,7 @@ class AuthController extends Controller
         // validate the request
         $validator = Validator::make($req, [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email:rfc,dns|max:255',
             'password' => 'required|min:8|confirmed'
         ]);
 
@@ -83,7 +83,7 @@ class AuthController extends Controller
 
         // validate the request
         $validator = Validator::make($req, [
-            'email' => 'required|email|max:255',
+            'email' => 'required|email:rfc,dns|max:255',
             'password' => 'required|min:8'
         ]);
 
