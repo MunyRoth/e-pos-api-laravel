@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Bill;
 use App\Http\Requests\StoreBillRequest;
 use App\Http\Requests\UpdateBillRequest;
-use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,8 +30,9 @@ class BillController extends Controller
     public function store(StoreBillRequest $request, Bill $bill): Response
     {
         $userId =  Auth::guard('api')->user()['id'];
-        $user = User::find($userId);
-        $user->bills()->save($bill);
+
+        $bill->user_id = $userId;
+        $bill->save();
 
         return Response([
             'status' => 201,
@@ -44,17 +44,13 @@ class BillController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Bill $bill)
+    public function show(Bill $bill): Response
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Bill $bill)
-    {
-        //
+        return Response([
+            'status' => 200,
+            'message' => 'got successfully',
+            'data' => $bill->load('billDetails')
+        ], 200);
     }
 
     /**

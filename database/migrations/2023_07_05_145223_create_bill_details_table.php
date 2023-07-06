@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('item_id')->constrained()->onDelete('cascade');
             $table->float('item_price');
             $table->float('item_cost');
-            $table->float('item_tax');
-            $table->float('item_discount');
+            $table->integer('item_tax');
+            $table->integer('item_discount');
             $table->integer('item_quantity');
             $table->timestamps();
         });

@@ -11,7 +11,11 @@ class StoreBillDetailRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return (
+            auth()->check() &&
+            (auth()->user()->role_id == 1 ||
+                auth()->user()->role_id == 2)
+        );
     }
 
     /**
@@ -22,7 +26,13 @@ class StoreBillDetailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'bill_id' => 'required|integer',
+            'item_id' => 'required|integer',
+            'item_price' => 'required',
+            'item_cost' => 'required',
+            'item_tax' => 'required|integer',
+            'item_discount' => 'required|integer',
+            'item_quantity' => 'required|integer',
         ];
     }
 }

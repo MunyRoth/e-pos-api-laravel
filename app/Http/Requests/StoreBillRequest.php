@@ -11,7 +11,11 @@ class StoreBillRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return (
+            auth()->check() &&
+            (auth()->user()->role_id == 1 ||
+                auth()->user()->role_id == 2)
+        );
     }
 
     /**
