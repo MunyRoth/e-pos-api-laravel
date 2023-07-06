@@ -46,7 +46,7 @@ class ItemController extends Controller
             $item['price'] = 0;
             $item['cost'] = 0;
             $item['quantity'] = 0;
-            $item['tax'] = 0;
+            $item['VAT'] = 0;
             $item['discount'] = 0;
             $store->items()->save($item);
 

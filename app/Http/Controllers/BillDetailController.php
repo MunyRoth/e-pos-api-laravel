@@ -32,7 +32,7 @@ class BillDetailController extends Controller
             $bill_detail['item_id'] = $request->input('item_id');
             $bill_detail['item_price'] = $request->input('item_price');
             $bill_detail['item_cost'] = $request->input('item_cost');
-            $bill_detail['item_tax'] = $request->input('item_tax');
+            $bill_detail['item_VAT'] = $request->input('item_VAT');
             $bill_detail['item_discount'] = $request->input('item_discount');
             $bill_detail['item_quantity'] = $request->input('item_quantity');
             $bill->billDetails()->save($bill_detail);
@@ -40,7 +40,7 @@ class BillDetailController extends Controller
             $item->update([
                 'price' => $request->input('item_price'),
                 'cost' => $request->input('item_cost'),
-                'tax' => $request->input('item_tax'),
+                'VAT' => $request->input('item_VAT'),
                 'discount' => $request->input('item_discount'),
                 'quantity' => $item['quantity'] + $request->input('item_quantity')
             ]);

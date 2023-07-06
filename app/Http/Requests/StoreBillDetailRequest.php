@@ -30,7 +30,7 @@ class StoreBillDetailRequest extends FormRequest
             'item_id' => 'required|integer',
             'item_price' => 'required',
             'item_cost' => 'required',
-            'item_tax' => 'required|integer',
+            'item_VAT' => 'required|integer',
             'item_discount' => 'required|integer',
             'item_quantity' => 'required|integer',
         ];

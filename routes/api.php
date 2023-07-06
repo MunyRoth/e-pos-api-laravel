@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\StoreBranchController;
 use App\Http\Controllers\StoreController;
@@ -57,5 +58,8 @@ Route::middleware('auth:api')->group(function () {
     // Bill
     Route::resource('bills', BillController::class);
     Route::resource('bill_details', BillDetailController::class);
+    
+    // Invoice
+    Route::resource('invoices', InvoiceController::class);
 
 });
