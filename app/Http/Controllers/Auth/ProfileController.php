@@ -13,7 +13,7 @@ class ProfileController extends Controller
 {
     public function getProfile(): Response
     {
-        $user = Auth::guard('api')->user();
+        $user = Auth::guard('api')->user()->load('role', 'stores');
 
         return Response([
             'status' => 200,

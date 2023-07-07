@@ -24,8 +24,18 @@ class DatabaseSeeder extends Seeder
             'role_id' => 2,
             'name' => 'Muny Roth',
             'email' => 'munyroth@gmail.com',
+            'avatar' => 'https://res.cloudinary.com/dlb5onqd6/image/upload/v1687882433/wdjawobxyasvexziglkk.png',
             'email_verified_at' => now(),
             'password' => bcrypt('admin@143272')
+        ]);
+
+        User::insert([
+            'role_id' => 3,
+            'name' => 'Muny Roth',
+            'email' => 'munyrachny@gmail.com',
+            'avatar' => 'https://res.cloudinary.com/dlb5onqd6/image/upload/v1687882433/wdjawobxyasvexziglkk.png',
+            'email_verified_at' => now(),
+            'password' => bcrypt('12345678')
         ]);
     }
 }
