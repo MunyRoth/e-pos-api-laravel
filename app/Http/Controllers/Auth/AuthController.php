@@ -90,10 +90,10 @@ class AuthController extends Controller
         // check validation
         if ($validator->fails()) {
             return Response([
-                'status' => 400,
+                'status' => 422,
                 'message' => $validator->errors()->first(),
                 'data' => ''
-            ], 400);
+            ], 422);
         }
 
         // check email and password
@@ -115,6 +115,8 @@ class AuthController extends Controller
             'status' => 200,
             'message' => 'login successful',
             'data' => [
+                'stores' => $user->stores,
+                'role' => $user->role,
                 'token' => $token
             ]
         ], 200);
