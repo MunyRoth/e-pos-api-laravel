@@ -29,7 +29,8 @@ class StoreStoreRequest extends FormRequest
             'email' => 'email:rfc,dns|max:255',
             'phone' => 'numeric|max:10000000000',
 
-            'address_km' => 'required|string|max:255'
+            'address_km' => 'required|string|max:255',
+            'branch_name_km' => 'string|max:255'
         ];
     }
 }

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('store_branches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('store_id')->constrained()->onDelete('cascade');
+            $table->string('name_km')->nullable();
+            $table->string('name_en')->nullable();
             $table->text('address_km');
             $table->text('address_en')->nullable();
             $table->text('location')->nullable();

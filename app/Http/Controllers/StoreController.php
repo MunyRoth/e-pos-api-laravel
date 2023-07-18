@@ -46,6 +46,7 @@ class StoreController extends Controller
 
         $branch = new StoreBranch;
         $branch->address_km = $request->address_km;
+        if ($request->has('branch_name_km')) $branch->name_km = $request->branch_name_km;
         $store->branches()->save($branch);
 
         $store->users()->sync($user->id);
