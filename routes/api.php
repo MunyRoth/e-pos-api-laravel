@@ -7,6 +7,7 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillDetailController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\StockInController;
 use App\Http\Controllers\StoreBranchController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
@@ -55,10 +56,13 @@ Route::middleware('auth:api')->group(function () {
     Route::put('items/{id}', [ItemController::class, 'update']);
     Route::delete('items/{id}', [ItemController::class, 'destroy']);
 
+    // Stock In
+    Route::post('stock_in', [StockInController::class, 'store']);
+
     // Bill
     Route::resource('bills', BillController::class);
     Route::resource('bill_details', BillDetailController::class);
-    
+
     // Invoice
     Route::resource('invoices', InvoiceController::class);
 

@@ -10,10 +10,13 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
+        'image_url',
+        'name',
         'price',
         'cost',
-        'tax',
+        'VAT',
         'discount',
-        'quantity'
+        'quantity',
+        'is_deleted'
     ];
 }
