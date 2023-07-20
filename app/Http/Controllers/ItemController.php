@@ -17,7 +17,9 @@ class ItemController extends Controller
      */
     public function index($storeId): Response
     {
-        $items = Item::where(['store_id' => $storeId])->get();
+        $items = Item::where(['store_id' => $storeId])
+            ->where(['is_deleted' => 0])
+            ->get();
 
         return Response([
             'status' => 200,
@@ -81,15 +83,7 @@ class ItemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Item $item)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Item $item)
+    public function show($id)
     {
         //
     }
@@ -97,7 +91,7 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateItemRequest $request, Item $item)
+    public function update(UpdateItemRequest $request, $id)
     {
         //
     }
@@ -105,8 +99,26 @@ class ItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Item $item)
+    public function destroy($id): Response
     {
-        //
+        $item = Item::find($id);
+
+        if ($item) {
+            $item->update([
+                'is_deleted' => true
+            ]);
+
+            return Response([
+                'status' => 200,
+                'message' => 'deleted successfully',
+                'data' => $item
+            ], 200);
+        }
+
+        return Response([
+            'status' => 404,
+            'message' => 'not found',
+            'data' => ''
+        ], 404);
     }
 }

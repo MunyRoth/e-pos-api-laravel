@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('VAT');
             $table->integer('discount');
-            $table->boolean('is_deleted')->nullable();
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }

@@ -50,7 +50,7 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('store_branches/{id}', [StoreBranchController::class, 'destroy']);
 
     // Items
-    Route::get('items/{storeId}', [ItemController::class, 'index']);
+    Route::get('items/store/{storeId}', [ItemController::class, 'index']);
     Route::get('items/{id}', [ItemController::class, 'show']);
     Route::post('items', [ItemController::class, 'store']);
     Route::put('items/{id}', [ItemController::class, 'update']);
