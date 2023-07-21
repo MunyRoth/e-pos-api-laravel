@@ -29,7 +29,7 @@ class StoreItemRequest extends FormRequest
             'store_id' => 'required|integer',
             'UPC' => 'required|integer',
             'SKU' => 'string',
-            'image' => 'image|mimes:jpeg,jpg,png|max:8191',
+            'image' => 'required|image|mimes:jpeg,jpg,png|max:8191',
             'name' => 'required|string',
         ];
     }

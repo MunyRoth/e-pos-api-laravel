@@ -47,16 +47,11 @@ class ItemController extends Controller
 
             $item = new Item;
 
-            if ($request->hasFile('image')) {
-                $imageUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
-                    'folder' => 'ePOS'
-                ])->getSecurePath();
+            $imageUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
+                'folder' => 'ePOS'
+            ])->getSecurePath();
 
-                $item['image_url'] = $imageUrl;
-            } else {
-                $item['image_url'] = "https://res.cloudinary.com/dlb5onqd6/image/upload/v1673491430/data/logo_ioru7h.png";
-            }
-
+            $item['image_url'] = $imageUrl;
             $item['UPC'] = $request->input('UPC');
             $item['name'] = $request->input('name');
             $item['price'] = 0;
