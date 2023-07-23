@@ -33,14 +33,11 @@ class StoreController extends Controller
     {
         $user =  Auth::guard('api')->user();
 
-        if ($request->hasFile('logo')) {
-            $logoUrl = Cloudinary::upload($request->file('logo')->getRealPath(), [
-                'folder' => 'ePOS'
-            ])->getSecurePath();
+        $logoUrl = Cloudinary::upload($request->file('logo')->getRealPath(), [
+            'folder' => 'ePOS'
+        ])->getSecurePath();
 
-            $store->logo_url = $logoUrl;
-        }
-
+        $store->logo_url = $logoUrl;
         $store->name_km = $request->name_km;
         $store->save();
 

@@ -24,7 +24,7 @@ class StoreStoreRequest extends FormRequest
         return [
             'name_km' => 'required|string|max:255',
             'name_en' => 'string|max:255',
-            'logo' => 'image|mimes:jpeg,jpg,png|max:8191',
+            'logo' => 'required|image|mimes:jpeg,jpg,png|max:8191',
             'website' => 'string|max:255',
             'email' => 'email:rfc,dns|max:255',
             'phone' => 'numeric|max:10000000000',
