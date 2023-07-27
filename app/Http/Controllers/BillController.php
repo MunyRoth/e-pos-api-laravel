@@ -13,7 +13,10 @@ class BillController extends Controller
      */
     public function index(): Response
     {
-        $bills =  Auth::guard('api')->user()['bills'];
+        $user =  Auth::guard('api')->user();
+        $bills = Bill::with('purchasedBy')
+            ->where('user_id', $user->id)
+            ->get();
 
         return Response([
             'status' => 200,
