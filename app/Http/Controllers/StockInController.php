@@ -6,6 +6,8 @@ use App\Http\Requests\StockInRequest;
 use App\Models\Bill;
 use App\Models\BillDetail;
 use App\Models\Item;
+use App\Models\Store;
+use App\Models\StoreBranch;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +19,12 @@ class StockInController extends Controller
     public function store(StockInRequest $request, Bill $bill): Response
     {
         $userId =  Auth::guard('api')->user()['id'];
+        $branchId = Store::find($request->input('store_id'))
+            ->branches
+            ->get($request->input('branch_index'))
+            ->id;
 
+        $bill['store_branch_id'] = $branchId;
         $bill['user_id'] = $userId;
         $bill->save();
 

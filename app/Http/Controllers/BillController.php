@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
+use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +15,10 @@ class BillController extends Controller
     public function index(): Response
     {
         $user =  Auth::guard('api')->user();
-        $bills = Bill::with('purchasedBy')
-            ->where('user_id', $user->id)
+        $bills = User::query()
+            ->select('name')
+            ->join('bills', 'users.id', '=', 'bills.user_id')
+            ->select('users.name as purchased_by', 'bills.id')
             ->get();
 
         return Response([
@@ -33,7 +36,7 @@ class BillController extends Controller
         return Response([
             'status' => 200,
             'message' => 'got successfully',
-            'data' => $bill->load('billDetails')
+            'data' => $bill->load('purchasedBy', 'billDetails')
         ], 200);
     }
 }
