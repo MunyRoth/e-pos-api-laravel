@@ -45,6 +45,7 @@ class StoreController extends Controller
         $branch = new StoreBranch;
         $branch->address_km = $request->address_km;
         if ($request->has('branch_name_km')) $branch->name_km = $request->branch_name_km;
+        else $branch->name_km = 'កណ្តាល';
         $store->branches()->save($branch);
 
         $customer = new Customer;

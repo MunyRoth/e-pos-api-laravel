@@ -60,8 +60,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('stock_in', [StockInController::class, 'store']);
 
     // Bill
-    Route::resource('bills', BillController::class);
-    Route::resource('bill_details', BillDetailController::class);
+    Route::get('bills/store/{storeId}', [BillController::class, 'index']);
+    Route::get('bills/{id}', [BillController::class, 'show']);
 
     // Invoice
     Route::resource('invoices', InvoiceController::class);

@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bill;
 use App\Models\BillDetail;
-use App\Http\Requests\StoreBillDetailRequest;
-use App\Http\Requests\UpdateBillDetailRequest;
-use App\Models\Item;
 use Illuminate\Http\Response;
 
 class BillDetailController extends Controller
@@ -20,66 +16,14 @@ class BillDetailController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreBillDetailRequest $request): Response
-    {
-        $bill = Bill::find($request->input('bill_id'));
-        $item = Item::find($request->input('item_id'));
-
-        if ($bill && $item) {
-            $bill_detail = new BillDetail;
-            $bill_detail['item_id'] = $request->input('item_id');
-            $bill_detail['item_price'] = $request->input('item_price');
-            $bill_detail['item_cost'] = $request->input('item_cost');
-            $bill_detail['item_VAT'] = $request->input('item_VAT');
-            $bill_detail['item_discount'] = $request->input('item_discount');
-            $bill_detail['item_quantity'] = $request->input('item_quantity');
-            $bill->billDetails()->save($bill_detail);
-
-            $item->update([
-                'price' => $request->input('item_price'),
-                'cost' => $request->input('item_cost'),
-                'VAT' => $request->input('item_VAT'),
-                'discount' => $request->input('item_discount'),
-                'quantity' => $item['quantity'] + $request->input('item_quantity')
-            ]);
-
-            return Response([
-                'status' => 201,
-                'message' => 'uploaded successfully',
-                'data' => $bill_detail
-            ], 201);
-        }
-
-        return Response([
-            'status' => 404,
-            'message' => 'not found',
-            'data' => ''
-        ], 404);
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show(BillDetail $billDetail)
+    public function show(BillDetail $billDetail): Response
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateBillDetailRequest $request, BillDetail $billDetail)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(BillDetail $billDetail)
-    {
-        //
+        return Response([
+            'status' => 200,
+            'message' => 'got successfully',
+            'data' => $billDetail
+        ], 200);
     }
 }

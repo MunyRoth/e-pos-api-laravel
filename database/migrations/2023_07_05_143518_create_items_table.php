@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('store_id')->constrained()->onDelete('cascade');
-            $table->integer('UPC')->unique();
+            $table->integer('UPC');
             $table->string('SKU')->nullable();
             $table->string('image_url');
             $table->string('name');
