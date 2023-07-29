@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
-use App\Models\User;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 
 class BillController extends Controller
 {
@@ -14,11 +13,13 @@ class BillController extends Controller
      */
     public function index(): Response
     {
-        $user =  Auth::guard('api')->user();
-        $bills = User::query()
-            ->select('name')
-            ->join('bills', 'users.id', '=', 'bills.user_id')
-            ->select('users.name as purchased_by', 'bills.id')
+        $bills = Bill::query()
+            ->select('bills.id', 'users.name as purchased_by', 'store_branches.name_km as branch')
+            ->join('users', 'bills.user_id', '=', 'users.id')
+            ->join('store_branches', function (JoinClause $join) {
+                $join->on('bills.store_branch_id', '=', 'store_branches.id')
+                    ->where('store_branches.store_id', '=', 1);
+            })
             ->get();
 
         return Response([

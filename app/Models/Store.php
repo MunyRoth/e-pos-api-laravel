@@ -25,12 +25,17 @@ class Store extends Model
         return $this->belongsToMany(User::class, 'user_stores');
     }
 
-    public function branches(): hasMany
+    public function branches(): HasMany
     {
         return $this->hasMany(StoreBranch::class);
     }
 
-    public function items(): hasMany
+    public function customers(): HasMany
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+    public function items(): HasMany
     {
         return $this->hasMany(Item::class);
     }

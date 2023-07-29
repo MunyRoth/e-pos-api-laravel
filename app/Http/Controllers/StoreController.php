@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Store;
 use App\Http\Requests\StoreStoreRequest;
 use App\Http\Requests\UpdateStoreRequest;
@@ -45,6 +46,11 @@ class StoreController extends Controller
         $branch->address_km = $request->address_km;
         if ($request->has('branch_name_km')) $branch->name_km = $request->branch_name_km;
         $store->branches()->save($branch);
+
+        $customer = new Customer;
+        $customer->name = "អតិថិជនទូទៅ";
+        $customer->phone = 1;
+        $store->customers()->save($customer);
 
         $store->users()->sync($user->id);
 
