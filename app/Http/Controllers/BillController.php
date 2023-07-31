@@ -46,7 +46,7 @@ class BillController extends Controller
         return Response([
             'status' => 200,
             'message' => 'got successfully',
-            'data' => $bill->load('purchasedBy', 'billDetails')
+            'data' => $bill->load('purchasedBy', 'billDetails.item')
         ], 200);
     }
 }
