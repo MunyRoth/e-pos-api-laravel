@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
 use App\Models\Store;
+use App\Models\StoreBranch;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Response;
 
@@ -36,13 +37,13 @@ class ItemController extends Controller
 
         if ($store) {
 
-//            if (Item::where('UPC', $request['UPC'])->exists()) {
-//                return Response([
-//                    'status' => 409,
-//                    'message' => 'item exists',
-//                    'data' => ''
-//                ], 409);
-//            }
+            if (Item::where('UPC', $request['UPC'])->exists()) {
+                return Response([
+                    'status' => 409,
+                    'message' => 'item exists',
+                    'data' => ''
+                ], 409);
+            }
 
             $item = new Item;
 
